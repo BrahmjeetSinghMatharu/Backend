@@ -1,0 +1,63 @@
+<%- include('./partials/header') %>
+
+<% const successMessage = Array.isArray(success) ? success[0] : success; %>
+
+<main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <% if(successMessage){ %>
+        <div class="mb-6 rounded-2xl border border-mint/30 bg-mint/20 px-4 py-3 text-sm text-ink">
+            <i class="ri-checkbox-circle-line mr-1"></i>
+            <%= successMessage %>
+        </div>
+    <% } %>
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-4">
+        <aside class="rounded-3xl border border-ink/10 bg-white p-5 shadow-soft lg:col-span-1">
+            <h3 class="font-display text-xl font-semibold">Admin Menu</h3>
+            <div class="mt-4 space-y-2 text-sm font-medium">
+                <a class="block rounded-xl bg-ink px-3 py-2 text-white" href="/owners/admin">Create Product</a>
+                <a class="block rounded-xl px-3 py-2 transition hover:bg-sand" href="/shop">View Shop</a>
+            </div>
+        </aside>
+
+        <section class="rounded-3xl border border-ink/10 bg-white p-6 shadow-soft lg:col-span-3">
+            <div class="mb-6 flex items-center justify-between">
+                <h2 class="font-display text-3xl font-bold">Create New Product</h2>
+                <span class="rounded-full bg-sand px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-ink/70">Draft</span>
+            </div>
+
+            <form autocomplete="off" action="/products/create" method="post" enctype="multipart/form-data" class="space-y-6">
+                <div>
+                    <h3 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-steel">Product Details</h3>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <input name="name" type="text" placeholder="Product Name" class="w-full rounded-xl border border-ink/15 bg-sand px-4 py-3 outline-none focus:border-ink" required>
+                        <input name="price" type="number" placeholder="Product Price" class="w-full rounded-xl border border-ink/15 bg-sand px-4 py-3 outline-none focus:border-ink" required>
+                        <input name="discount" type="number" placeholder="Discount" class="w-full rounded-xl border border-ink/15 bg-sand px-4 py-3 outline-none focus:border-ink" value="0">
+                        <input name="image" type="file" class="w-full rounded-xl border border-dashed border-ink/25 bg-sand px-4 py-3" required>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-steel">Color System</h3>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                        <div>
+                            <label class="mb-1 block text-sm font-medium">Background</label>
+                            <input name="bgcolor" type="text" placeholder="#f3f4f6" class="w-full rounded-xl border border-ink/15 bg-sand px-4 py-3 outline-none focus:border-ink" required>
+                        </div>
+                        <div>
+                            <label class="mb-1 block text-sm font-medium">Panel</label>
+                            <input name="panelcolor" type="text" placeholder="#111827" class="w-full rounded-xl border border-ink/15 bg-sand px-4 py-3 outline-none focus:border-ink" required>
+                        </div>
+                        <div>
+                            <label class="mb-1 block text-sm font-medium">Text</label>
+                            <input name="textcolor" type="text" placeholder="#ffffff" class="w-full rounded-xl border border-ink/15 bg-sand px-4 py-3 outline-none focus:border-ink" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="rounded-xl bg-ink px-5 py-3 font-semibold text-white transition hover:bg-coral">Create Product</button>
+            </form>
+        </section>
+    </div>
+</main>
+
+<%- include('./partials/footer') %>

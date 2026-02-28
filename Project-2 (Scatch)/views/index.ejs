@@ -1,0 +1,51 @@
+<%- include('./partials/header') %>
+
+<% const errorMessage = Array.isArray(error) ? error[0] : error; %>
+
+<div class="mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl grid-cols-1 gap-6 px-4 py-8 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-12">
+    <section class="rounded-3xl border border-ink/10 bg-white/80 p-6 shadow-soft backdrop-blur lg:p-10">
+        <div class="mb-8">
+            <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-steel">Crafted essentials</p>
+            <h1 class="font-display text-4xl font-bold leading-tight lg:text-5xl">A sharper way to shop <span class="text-coral">Scatch</span></h1>
+            <p class="mt-4 max-w-md text-sm text-ink/70">Create your account and manage products, pricing, and cart flows from one clean dashboard.</p>
+        </div>
+
+        <% if(errorMessage){ %>
+            <div class="mb-6 rounded-2xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <i class="ri-error-warning-line mr-1"></i>
+                <%= errorMessage %>
+            </div>
+        <% } %>
+
+        <h2 class="mb-3 font-display text-2xl font-semibold">Create Account</h2>
+        <form autocomplete="off" action="/users/register" method="post" class="space-y-3">
+            <input class="w-full rounded-xl border border-ink/15 bg-sand px-4 py-3 outline-none transition focus:border-ink" type="text" placeholder="Full Name" name="fullname" required>
+            <input class="w-full rounded-xl border border-ink/15 bg-sand px-4 py-3 outline-none transition focus:border-ink" type="email" placeholder="Email" name="email" required>
+            <input class="w-full rounded-xl border border-ink/15 bg-sand px-4 py-3 outline-none transition focus:border-ink" type="password" placeholder="Password" name="password" required>
+            <button class="w-full rounded-xl bg-ink px-4 py-3 font-semibold text-white transition hover:bg-coral">Create My Account</button>
+        </form>
+    </section>
+
+    <section class="rounded-3xl border border-ink/10 bg-ink p-6 text-white shadow-soft lg:p-10">
+        <div class="mb-8 flex items-center justify-between">
+            <h2 class="font-display text-3xl font-semibold">Welcome Back</h2>
+            <div class="rounded-full bg-white/15 px-4 py-1 text-xs uppercase tracking-[0.2em]">Member</div>
+        </div>
+
+        <p class="mb-8 text-sm text-white/80">Log in to continue to your product feed and cart.</p>
+
+        <form autocomplete="off" action="/users/login" method="post" class="space-y-3">
+            <input class="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white placeholder:text-white/60 outline-none transition focus:border-mint" type="email" placeholder="Email" name="email" required>
+            <input class="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white placeholder:text-white/60 outline-none transition focus:border-mint" type="password" placeholder="Password" name="password" required>
+            <button class="w-full rounded-xl bg-mint px-4 py-3 font-semibold text-ink transition hover:bg-white">Login</button>
+        </form>
+
+        <div class="mt-10 grid grid-cols-3 gap-3 text-center text-xs text-white/80">
+            <div class="rounded-xl bg-white/10 p-3">Fast</div>
+            <div class="rounded-xl bg-white/10 p-3">Secure</div>
+            <div class="rounded-xl bg-white/10 p-3">Modern</div>
+        </div>
+    </section>
+</div>
+
+<%- include('./partials/footer') %>

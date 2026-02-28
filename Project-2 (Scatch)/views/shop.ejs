@@ -1,0 +1,56 @@
+<%- include('./partials/header') %>
+
+<% const flashMessage = Array.isArray(success) ? success[0] : success; %>
+<% const safeProducts = Array.isArray(products) ? products : []; %>
+
+<main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <% if(flashMessage){ %>
+        <div class="mb-6 rounded-2xl border border-mint/30 bg-mint/20 px-4 py-3 text-sm text-ink">
+            <i class="ri-checkbox-circle-line mr-1"></i>
+            <%= flashMessage %>
+        </div>
+    <% } %>
+
+    <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-steel">Storefront</p>
+            <h1 class="font-display text-4xl font-bold">Shop Collection</h1>
+        </div>
+        <form action="/shop" class="flex items-center gap-2 rounded-xl border border-ink/15 bg-white px-3 py-2 shadow-soft">
+            <label class="text-sm text-ink/70" for="sortby">Sort</label>
+            <select class="rounded-lg border border-ink/15 px-3 py-1 text-sm" name="sortby" id="sortby">
+                <option value="popular">Popular</option>
+                <option value="newest">Newest</option>
+            </select>
+        </form>
+    </div>
+
+    <% if(!safeProducts.length){ %>
+        <div class="rounded-3xl border border-dashed border-ink/20 bg-white/70 p-10 text-center">
+            <h3 class="font-display text-2xl font-semibold">No products yet</h3>
+            <p class="mt-2 text-sm text-ink/70">Create your first product from the admin page.</p>
+            <a href="/owners/admin" class="mt-5 inline-block rounded-xl bg-ink px-5 py-2.5 font-semibold text-white transition hover:bg-coral">Go to Admin</a>
+        </div>
+    <% } %>
+
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <% safeProducts.forEach(function(product){ %>
+            <% const imageSrc = product.image ? ('data:image/jpeg;base64,' + product.image.toString('base64')) : '/images/1bag.png'; %>
+            <article class="overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-soft transition hover:-translate-y-1">
+                <div class="flex h-56 items-center justify-center" style="background-color: <%= product.bgcolor || '#f3f4f6' %>;"><img class="h-40 w-auto object-contain" src="<%= imageSrc %>" alt="<%= product.name %>"></div>
+                <div class="flex items-center justify-between p-4" style="background-color: <%= product.panelColor || '#111827' %>; color: <%= product.textColor || '#ffffff' %>;">
+                    <div>
+                        <h3 class="font-display text-lg font-semibold"><%= product.name %></h3>
+                        <p class="text-sm opacity-85">Premium carry bag</p>
+                        <h4 class="mt-1 text-base font-bold">₹ <%= product.price %></h4>
+                    </div>
+                    <a class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink transition hover:scale-105" href="/addtocart/<%= product._id %>">
+                        <i class="ri-shopping-bag-3-line"></i>
+                    </a>
+                </div>
+            </article>
+        <% }) %>
+    </div>
+</main>
+
+<%- include('./partials/footer') %>

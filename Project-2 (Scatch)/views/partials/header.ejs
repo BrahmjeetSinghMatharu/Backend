@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0B1020',
+                        sand: '#F6F3EC',
+                        coral: '#F26A4B',
+                        mint: '#4FD1B5',
+                        steel: '#8EA3B7'
+                    },
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    boxShadow: {
+                        soft: '0 10px 40px rgba(11, 16, 32, 0.10)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes floatBlob {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-14px) scale(1.03); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+
+        .blob {
+            animation: floatBlob 8s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="font-body bg-sand text-ink min-h-screen">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="blob absolute -top-20 -left-20 h-64 w-64 rounded-full bg-coral/15 blur-3xl"></div>
+        <div class="blob absolute right-0 top-1/3 h-80 w-80 rounded-full bg-mint/20 blur-3xl" style="animation-delay: 1s;"></div>
+        <div class="blob absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-ink/10 blur-3xl" style="animation-delay: 2s;"></div>
+    </div>
+
+    <nav class="sticky top-0 z-40 border-b border-ink/10 bg-sand/80 backdrop-blur">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+            <a href="/" class="font-display text-2xl font-bold tracking-tight">Scatch</a>
+
+            <% var loggedin = typeof loggedin !== "undefined" ? loggedin : true %>
+            <% if(loggedin){ %>
+                <div class="flex items-center gap-2 sm:gap-4 text-sm font-medium">
+                    <a class="rounded-full px-3 py-1.5 transition hover:bg-ink hover:text-white" href="/shop">Shop</a>
+                    <a class="rounded-full px-3 py-1.5 transition hover:bg-ink hover:text-white" href="/cart">Cart</a>
+                    <a class="rounded-full px-3 py-1.5 transition hover:bg-ink hover:text-white" href="/owners/admin">Admin</a>
+                    <a class="rounded-full border border-red-500 px-3 py-1.5 text-red-600 transition hover:bg-red-500 hover:text-white" href="/users/logout">Logout</a>
+                </div>
+            <% } %>
+        </div>
+    </nav>
